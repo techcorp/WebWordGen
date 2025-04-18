@@ -1,5 +1,4 @@
 requests
-aiohttp 
-beautifulsoup4 
-lxml 
+aiohttp
+beautifulsoup4
 rich

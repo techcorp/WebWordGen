@@ -33,12 +33,12 @@ TOOL_VERSION = "1.0.0"
 # ASCII banner
 ASCII_BANNER = """
 
- _  _  _       _     _  _  _                _ _______             
-(_)(_)(_)     | |   (_)(_)(_)              | (_______)            
- _  _  _ _____| |__  _  _  _  ___   ____ __| |_   ___ _____ ____  
-| || || | ___ |  _ \| || || |/ _ \ / ___/ _  | | (_  | ___ |  _ \ 
-| || || | ____| |_) | || || | |_| | |  ( (_| | |___) | ____| | | |
- \_____/|_____|____/ \_____/ \___/|_|   \____|\_____/|_____|_| |_|
+ __      __      ___.   __      __                .___________               
+/  \    /  \ ____\_ |__/  \    /  \___________  __| _/  _____/  ____   ____  
+\   \/\/   _/ __ \| __ \   \/\/   /  _ \_  __ \/ __ /   \  ____/ __ \ /    \ 
+ \        /\  ___/| \_\ \        (  <_> |  | \/ /_/ \    \_\  \  ___/|   |  \
+  \__/\  /  \___  |___  /\__/\  / \____/|__|  \____ |\______  /\___  |___|  /
+       \/       \/    \/      \/                   \/       \/     \/     \/ 
 """
 
 # Setup logging (platform-independent path)
@@ -164,8 +164,8 @@ class WebWordGen:
         if not content:
             return
 
-        # Parse with BeautifulSoup
-        soup = BeautifulSoup(content, 'lxml')
+        # Parse with BeautifulSoup using html.parser
+        soup = BeautifulSoup(content, 'html.parser')
         text = soup.get_text(separator=' ', strip=True)
         
         # Extract words using regex
@@ -209,7 +209,7 @@ class WebWordGen:
                         content = await self.fetch_page(url, session)
                         if content:
                             self.extract_words(content)
-                            soup = BeautifulSoup(content, 'lxml')
+                            soup = BeautifulSoup(content, 'html.parser')
                             for link in soup.find_all('a', href=True):
                                 href = link['href']
                                 full_url = urljoin(self.base_url, href)
